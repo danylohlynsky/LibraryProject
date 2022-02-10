@@ -1,8 +1,8 @@
-package com.group4.service;
+package com.group4.service.implementations;
 
-import com.group4.dao.impl.BookDAO;
+import com.group4.dao.interfaces.BookDAO;
 import com.group4.model.Book;
-import com.group4.service.impl.BookService;
+import com.group4.service.interfaces.BookService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,31 +23,31 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public void addBook(Book book) {
-        this.bookDao.addBook(book);
+        this.bookDao.save(book);
     }
 
     @Override
     @Transactional
     public void updateBook(Book book) {
-        this.bookDao.updateBook(book);
+        this.bookDao.update(book);
     }
 
     @Override
     @Transactional
     public void removeBook(int id) {
-        this.bookDao.removeBook(id);
+        this.bookDao.deleteById(id);
 
     }
 
     @Override
     @Transactional
     public Book getBookById(int id) {
-        return this.bookDao.getBookById(id);
+        return this.bookDao.findById(id);
     }
 
     @Override
     @Transactional
     public List<Book> listBook() {
-        return this.bookDao.listBooks();
+        return this.bookDao.findAll();
     }
 }

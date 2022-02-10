@@ -1,35 +1,27 @@
-package com.group4.dao;
+package com.group4.dao.implementations;
 
-import com.group4.dao.impl.RoleDAO;
-import com.group4.model.Role;
-import lombok.NoArgsConstructor;
+import com.group4.dao.interfaces.DAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
-@Repository
-@Transactional
-@NoArgsConstructor
-public class RoleDAOImpl implements RoleDAO {
-
+public class DAOImpl<T> implements DAO<T> {
     public LocalSessionFactoryBean localSessionFactoryBean;
 
     private SessionFactory sessionFactory;
 
 
     @Autowired
-    public RoleDAOImpl(LocalSessionFactoryBean localSessionFactoryBean) {
+    public DAOImpl(LocalSessionFactoryBean localSessionFactoryBean) {
         this.localSessionFactoryBean = localSessionFactoryBean;
         sessionFactory = localSessionFactoryBean.getObject();
     }
 
     @Override
-    public void create(Role role) {
+    public void save(T role) {
         Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
@@ -45,7 +37,7 @@ public class RoleDAOImpl implements RoleDAO {
     }
 
     @Override
-    public void update(Role role) {
+    public void update(T role) {
         Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
@@ -61,12 +53,12 @@ public class RoleDAOImpl implements RoleDAO {
     }
 
     @Override
-    public List<Role> findAll() {
+    public List<T> findAll() {
         return null;
     }
 
     @Override
-    public Role findOne() {
+    public T findById(int id) {
         return null;
     }
 
@@ -76,7 +68,7 @@ public class RoleDAOImpl implements RoleDAO {
     }
 
     @Override
-    public void deleteById() {
+    public void deleteById(int i) {
 
     }
 }

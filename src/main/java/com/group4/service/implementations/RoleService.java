@@ -1,8 +1,8 @@
-package com.group4.service;
+package com.group4.service.implementations;
 
-import com.group4.dao.impl.RoleDAO;
+import com.group4.dao.interfaces.RoleDAO;
 import com.group4.model.Role;
-import com.group4.service.impl.RoleInterface;
+import com.group4.service.interfaces.RoleInterface;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,7 +19,7 @@ class RoleService implements RoleInterface {
 
     @Override
     public void save(Role role) {
-        roleDAO.create(role);
+        roleDAO.save(role);
     }
 
     @Override
