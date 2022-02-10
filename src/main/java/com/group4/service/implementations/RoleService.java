@@ -19,7 +19,7 @@ class RoleService implements RoleInterface {
 
     @Override
     public void save(Role role) {
-        roleDAO.create(role);
+        roleDAO.save(role);
     }
 
     @Override

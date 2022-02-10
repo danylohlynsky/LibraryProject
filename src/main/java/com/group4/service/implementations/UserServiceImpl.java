@@ -23,30 +23,30 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void addBook(User user) {
-        this.userDao.addUser(user);
+        this.userDao.save(user);
     }
 
     @Override
     @Transactional
     public void updateBook(User user) {
-        this.userDao.addUser(user);
+        this.userDao.update(user);
     }
 
     @Override
     @Transactional
     public void removeBook(int id) {
-        this.userDao.removeUser(id);
+        this.userDao.deleteById(id);
     }
 
     @Override
     @Transactional
     public User getUserById(int id) {
-        return this.userDao.getUserById(id);
+        return this.userDao.findById(id);
     }
 
     @Override
     @Transactional
     public List<User> listUser() {
-        return this.userDao.listUsers();
+        return this.userDao.findAll();
     }
 }

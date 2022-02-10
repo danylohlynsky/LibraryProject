@@ -1,7 +1,7 @@
 package com.group4.controller;
 
 import com.group4.model.Book;
-import com.group4.service.impl.BookService;
+import com.group4.service.interfaces.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
