@@ -1,7 +1,6 @@
 package com.group4.dao.implementations;
 
 import com.group4.dao.interfaces.DAO;
-import com.group4.model.Role;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,20 +8,20 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 import java.util.List;
 
-public class DAOImp<T> implements DAO<T> {
+public class DAOImpl<T> implements DAO<T> {
     public LocalSessionFactoryBean localSessionFactoryBean;
 
     private SessionFactory sessionFactory;
 
 
     @Autowired
-    public DAOImp(LocalSessionFactoryBean localSessionFactoryBean) {
+    public DAOImpl(LocalSessionFactoryBean localSessionFactoryBean) {
         this.localSessionFactoryBean = localSessionFactoryBean;
         sessionFactory = localSessionFactoryBean.getObject();
     }
 
     @Override
-    public void create(T role) {
+    public void save(T role) {
         Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
@@ -59,7 +58,7 @@ public class DAOImp<T> implements DAO<T> {
     }
 
     @Override
-    public T findOne() {
+    public T findById(int id) {
         return null;
     }
 
@@ -69,7 +68,7 @@ public class DAOImp<T> implements DAO<T> {
     }
 
     @Override
-    public void deleteById() {
+    public void deleteById(int i) {
 
     }
 }

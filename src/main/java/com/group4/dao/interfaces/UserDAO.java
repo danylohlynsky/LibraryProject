@@ -4,14 +4,6 @@ import com.group4.model.User;
 
 import java.util.List;
 
-public interface UserDAO {
-    void addUser(User user);
+public interface UserDAO extends DAO<User> {
 
-    void updateUser(User user);
-
-    void removeUser(int id);
-
-    User getUserById(int id);
-
-    List<User> listUsers();
 }

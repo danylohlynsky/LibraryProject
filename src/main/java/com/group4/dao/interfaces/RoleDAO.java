@@ -5,16 +5,6 @@ import com.group4.model.Role;
 
 import java.util.List;
 
-public interface RoleDAO {
-    void create(Role role);
+public interface RoleDAO extends DAO<Role> {
 
-    void update(Role role);
-
-    List<Role> findAll();
-
-    Role findOne();
-
-    void deleteAll();
-
-    void deleteById();
 }
