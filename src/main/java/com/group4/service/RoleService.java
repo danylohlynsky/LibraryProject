@@ -1,7 +1,8 @@
 package com.group4.service;
 
-import com.group4.dao.RoleDAO;
+import com.group4.dao.impl.RoleDAO;
 import com.group4.model.Role;
+import com.group4.service.impl.RoleInterface;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

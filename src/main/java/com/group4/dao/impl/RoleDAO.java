@@ -1,7 +1,7 @@
-package com.group4.dao;
+package com.group4.dao.impl;
 
 import com.group4.model.Role;
-import org.springframework.stereotype.Component;
+
 
 import java.util.List;
 
