@@ -1,6 +1,6 @@
-package com.group4.dao;
+package com.group4.dao.implementations;
 
-import com.group4.dao.impl.BookDAO;
+import com.group4.dao.interfaces.BookDAO;
 import com.group4.model.Book;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;

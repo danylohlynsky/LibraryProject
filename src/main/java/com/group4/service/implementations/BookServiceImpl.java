@@ -1,8 +1,8 @@
-package com.group4.service;
+package com.group4.service.implementations;
 
-import com.group4.dao.impl.BookDAO;
+import com.group4.dao.interfaces.BookDAO;
 import com.group4.model.Book;
-import com.group4.service.impl.BookService;
+import com.group4.service.interfaces.BookService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

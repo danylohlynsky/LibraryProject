@@ -1,8 +1,8 @@
-package com.group4.service;
+package com.group4.service.implementations;
 
-import com.group4.dao.impl.UserDAO;
+import com.group4.dao.interfaces.UserDAO;
 import com.group4.model.User;
-import com.group4.service.impl.UserService;
+import com.group4.service.interfaces.UserService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

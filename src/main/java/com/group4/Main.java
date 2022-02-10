@@ -2,7 +2,7 @@ package com.group4;
 
 import com.group4.config.SpringConfig;
 import com.group4.model.Role;
-import com.group4.service.impl.RoleInterface;
+import com.group4.service.interfaces.RoleInterface;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 

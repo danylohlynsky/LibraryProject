@@ -1,6 +1,6 @@
-package com.group4.dao;
+package com.group4.dao.implementations;
 
-import com.group4.dao.impl.UserDAO;
+import com.group4.dao.interfaces.UserDAO;
 import com.group4.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

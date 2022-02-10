@@ -1,4 +1,4 @@
-package com.group4.service.impl;
+package com.group4.service.interfaces;
 
 import com.group4.model.Book;
 
