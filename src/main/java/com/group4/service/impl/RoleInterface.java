@@ -1,4 +1,4 @@
-package com.group4.service;
+package com.group4.service.impl;
 
 import com.group4.model.Role;
 import org.springframework.stereotype.Component;

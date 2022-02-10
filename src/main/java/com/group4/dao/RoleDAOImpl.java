@@ -1,5 +1,6 @@
 package com.group4.dao;
 
+import com.group4.dao.impl.RoleDAO;
 import com.group4.model.Role;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
