@@ -5,4 +5,5 @@ import org.springframework.stereotype.Component;
 
 public interface RoleInterface {
     void save(Role role);
+    void update(Role role);
 }

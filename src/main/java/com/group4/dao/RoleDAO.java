@@ -8,7 +8,7 @@ import java.util.List;
 public interface RoleDAO {
     void create(Role role);
 
-    Role update();
+    void update(Role role);
 
     List<Role> findAll();
 

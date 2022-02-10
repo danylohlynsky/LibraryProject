@@ -18,6 +18,9 @@ public class Main {
         Role role = new Role();
         role.setRole_name("Manager");
         roleInterface.save(role);
+        role.setRole_name("User");
+        roleInterface.update(role);
+
     }
 
     public static void main(String[] args) {

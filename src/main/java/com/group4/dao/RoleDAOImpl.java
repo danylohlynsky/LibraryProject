@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -20,6 +19,7 @@ public class RoleDAOImpl implements RoleDAO {
     public LocalSessionFactoryBean localSessionFactoryBean;
 
     private SessionFactory sessionFactory;
+
 
     @Autowired
     public RoleDAOImpl(LocalSessionFactoryBean localSessionFactoryBean) {
@@ -44,8 +44,19 @@ public class RoleDAOImpl implements RoleDAO {
     }
 
     @Override
-    public Role update() {
-        return null;
+    public void update(Role role) {
+        Session session = sessionFactory.openSession();
+        try {
+            session.beginTransaction();
+            session.update(role);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+            System.out.println("Error performing JPA operation. Transaction is rolled back");
+        } finally {
+            session.close();
+        }
     }
 
     @Override

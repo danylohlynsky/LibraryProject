@@ -16,7 +16,13 @@ class RoleService implements RoleInterface {
         this.roleDAO = roleDAO;
     }
 
+    @Override
     public void save(Role role) {
         roleDAO.create(role);
+    }
+
+    @Override
+    public void update(Role role) {
+        roleDAO.update(role);
     }
 }
