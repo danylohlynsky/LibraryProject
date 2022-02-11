@@ -20,16 +20,16 @@ public class Book {
     @Column(nullable = false)
     String title;
 
-    @Column(nullable = false)
-    int available_amount;
+    @Column(name = "available_amount", nullable = false)
+    int availableAmount;
 
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "main_author_id", nullable = false)
-    private Author main_author;
+    private Author mainAuthor;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "books_authors",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private List<Author> co_authors;
+    private List<Author> coAuthors;
 }
