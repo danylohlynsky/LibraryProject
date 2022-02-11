@@ -1,7 +1,6 @@
 package com.group4.model;
 
 
-import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,11 +17,11 @@ public class User {
     @Column
     int id;
 
-    @Column(nullable = false)
-    String first_name;
+    @Column(name = "first_name", nullable = false)
+    String firstName;
 
-    @Column(nullable = false)
-    String last_name;
+    @Column(name = "last_name", nullable = false)
+    String lastName;
 
     @Column(nullable = false, unique = true)
     String email;
@@ -37,6 +36,7 @@ public class User {
     @Column(nullable = false)
     int age;
 
-    @Column(nullable = false)
-    Date reg_date;
+    @Column(name = "rwgistration_date", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    Date registrationDate;
 }
