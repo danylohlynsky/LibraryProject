@@ -7,7 +7,7 @@ public interface DAO<T> {
 
     void update(T entity);
 
-    List<T> findAll();
+    List<T> findAll(Class clazz);
 
     T findById(int id);
 
