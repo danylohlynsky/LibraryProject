@@ -21,11 +21,11 @@ public class DAOImpl<T> implements DAO<T> {
     }
 
     @Override
-    public void save(T role) {
+    public void save(T entity) {
         Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
-            session.save(role);
+            session.save(entity);
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -37,11 +37,11 @@ public class DAOImpl<T> implements DAO<T> {
     }
 
     @Override
-    public void update(T role) {
+    public void update(T entity) {
         Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
-            session.update(role);
+            session.update(entity);
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
