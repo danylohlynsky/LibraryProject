@@ -21,4 +21,8 @@ public class BookDAOImpl extends DAOImpl<Book> implements BookDAO {
     public BookDAOImpl(LocalSessionFactoryBean localSessionFactoryBean) {
         super(localSessionFactoryBean);
     }
+
+    public List<Book> findAll() {
+        return super.findAll(Book.class);
+    }
 }

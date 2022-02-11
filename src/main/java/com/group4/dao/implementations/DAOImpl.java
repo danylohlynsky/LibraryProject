@@ -3,6 +3,7 @@ package com.group4.dao.implementations;
 import com.group4.dao.interfaces.DAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
@@ -53,8 +54,22 @@ public class DAOImpl<T> implements DAO<T> {
     }
 
     @Override
-    public List<T> findAll() {
-        return null;
+    public List<T> findAll(Class clazz) {
+        List objects = null;
+        Session session = sessionFactory.openSession();
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from " + clazz.getName());
+            objects = query.list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+            System.out.println("Error performing JPA operation. Transaction is rolled back");
+        } finally {
+            session.close();
+        }
+        return objects;
     }
 
     @Override

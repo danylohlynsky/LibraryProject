@@ -45,6 +45,6 @@ public class LoggerServiceImpl implements LoggerService {
     @Override
     @Transactional
     public List<Logger> listLogs() {
-        return this.loggerDAO.findAll();
+        return this.loggerDAO.findAll(Logger.class);
     }
 }

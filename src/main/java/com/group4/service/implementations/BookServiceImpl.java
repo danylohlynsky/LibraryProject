@@ -48,6 +48,6 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public List<Book> listBook() {
-        return this.bookDao.findAll();
+        return this.bookDao.findAll(Book.class);
     }
 }
