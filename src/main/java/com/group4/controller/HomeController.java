@@ -1,7 +1,5 @@
 package com.group4.controller;
 
-import com.group4.model.Author;
-import com.group4.model.Book;
 import com.group4.service.interfaces.AuthorService;
 import com.group4.service.interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
