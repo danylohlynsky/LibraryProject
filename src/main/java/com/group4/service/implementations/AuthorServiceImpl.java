@@ -33,14 +33,14 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     @Transactional
     public void removeAuthor(int id) {
-        this.authorDAO.deleteById(id);
+        this.authorDAO.deleteById(id, Author.class);
 
     }
 
     @Override
     @Transactional
     public Author getAuthorById(int id) {
-        return this.authorDAO.findById(id);
+        return (Author) this.authorDAO.findById(id, Author.class);
     }
 
     @Override

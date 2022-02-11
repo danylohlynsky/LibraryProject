@@ -13,12 +13,22 @@
                     <th>Title</th>
                     <th>Available</th>
                     <th>Author</th>
+                    <th colspan="3">Operation</th>
                 </tr>
 
                 <tr th:each = "book: ${listBooks}">
                     <td th:text="${book.getTitle()}"> />
                     <td th:text="${book.getAvailableAmount()}"></td>
                     <td th:text="${book.getMainAuthor().getFirstName()} + ' ' + ${book.getMainAuthor().getLastName()}"></td>
+                    <td>
+                        <a th:href = "@{'/update-book/' + ${book.getId()}}">Update</a>
+                    </td>
+                    <td>
+                        <a th:href = "@{'/read-task/' + ${book.getId()}}">Edit</a>
+                    </td>
+                    <td>
+                        <a th:href = "@{'/remove-book/' + ${book.getId()}}">Delete</a>
+                    </td>
                 </tr>
             </table>
         </form>

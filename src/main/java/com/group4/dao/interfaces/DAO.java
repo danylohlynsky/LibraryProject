@@ -9,9 +9,9 @@ public interface DAO<T> {
 
     List<T> findAll(Class clazz);
 
-    T findById(int id);
+    Object findById(int id, Class clazz);
 
     void deleteAll();
 
-    void deleteById(int id);
+    void deleteById(int id, Class clazz);
 }

@@ -35,14 +35,14 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public void removeBook(int id) {
-        this.bookDao.deleteById(id);
+        this.bookDao.deleteById(id, Book.class);
 
     }
 
     @Override
     @Transactional
     public Book getBookById(int id) {
-        return this.bookDao.findById(id);
+        return (Book) this.bookDao.findById(id, Book.class);
     }
 
     @Override

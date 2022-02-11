@@ -32,14 +32,14 @@ public class LoggerServiceImpl implements LoggerService {
     @Override
     @Transactional
     public void removeLog(int id) {
-        this.loggerDAO.deleteById(id);
+        this.loggerDAO.deleteById(id, Logger.class);
 
     }
 
     @Override
     @Transactional
     public Logger getLogById(int id) {
-        return this.loggerDAO.findById(id);
+        return (Logger) this.loggerDAO.findById(id, Logger.class);
     }
 
     @Override
