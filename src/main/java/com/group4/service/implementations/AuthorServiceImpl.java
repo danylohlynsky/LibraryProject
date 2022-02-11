@@ -46,6 +46,6 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     @Transactional
     public List<Author> listAuthor() {
-        return this.authorDAO.findAll();
+        return this.authorDAO.findAll(Author.class);
     }
 }

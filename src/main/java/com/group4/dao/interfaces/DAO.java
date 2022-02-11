@@ -3,11 +3,11 @@ package com.group4.dao.interfaces;
 import java.util.List;
 
 public interface DAO<T> {
-    void save(T role);
+    void save(T entity);
 
-    void update(T role);
+    void update(T entity);
 
-    List<T> findAll();
+    List<T> findAll(Class clazz);
 
     T findById(int id);
 
