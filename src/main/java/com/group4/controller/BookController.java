@@ -7,20 +7,20 @@ import com.group4.service.interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 
 @Controller
 public class BookController {
 
     private final BookService bookService;
+    private final AuthorService authorService;
 
     @Autowired
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, AuthorService authorService) {
         this.bookService = bookService;
+        this.authorService = authorService;
     }
 
 
@@ -33,15 +33,31 @@ public class BookController {
         return "book-list";
     }
 
-    @RequestMapping(value = "/books/add", method = RequestMethod.POST)
-    public String addBook(@ModelAttribute("book") Book book) {
-        if (book.getId() == 0) {
-            this.bookService.addBook(book);
-        } else {
-            this.bookService.updateBook(book);
-        }
+    @RequestMapping(value = "/books/add", method = RequestMethod.GET)
+    public String toAddPage() {
+        return "add-book";
+    }
 
-        return "book-list";
+
+    @RequestMapping(value = "/books/add", method = RequestMethod.POST)
+    @ResponseBody
+    public RedirectView  addBook(@RequestParam String title, @RequestParam String authorFullName, @RequestParam String availableAmount) {
+        Book newBook = new Book();
+        newBook.setTitle(title);
+        newBook.setAvailableAmount(Integer.parseInt(availableAmount));
+        String[] nameSurName = authorFullName.split(" ");
+        Author author = authorService.getAuthorByFullName(nameSurName);
+        if(author != null) {
+            newBook.setMainAuthor(author);
+        } else {
+            author = new Author();
+            author.setFirstName(nameSurName[0]);
+            author.setLastName(nameSurName[1]);
+            authorService.addAuthor(author);
+            newBook.setMainAuthor(author);
+        }
+        this.bookService.addBook(newBook);
+        return new RedirectView("/books");
     }
 
     @RequestMapping("/remove/{id}")

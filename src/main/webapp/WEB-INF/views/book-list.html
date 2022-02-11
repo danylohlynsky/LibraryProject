@@ -3,8 +3,8 @@
         <title>Book list</title>
     </head>
     <body>
-        <a href="/home">Home</a> |
-        <a href="/">Show all books</a> |
+        <a href="/">Home</a> |
+        <a href="/books">Show all books</a> |
         <br>
         <h2>Book list:</h2>
         <form action="book-list">
@@ -12,13 +12,18 @@
                 <tr>
                     <th>Title</th>
                     <th>Available</th>
+                    <th>Author</th>
                 </tr>
 
                 <tr th:each = "book: ${listBooks}">
-                    <th th:text="${book.getTitle()}"> />
-                    <th th:text="${book.getAvailableAmount()}" />
+                    <td th:text="${book.getTitle()}"> />
+                    <td th:text="${book.getAvailableAmount()}"></td>
+                    <td th:text="${book.getMainAuthor().getFirstName()} + ' ' + ${book.getMainAuthor().getLastName()}"></td>
                 </tr>
             </table>
         </form>
+
+        <a href="/books/add">Add new book</a>
+
     </body>
 </html>

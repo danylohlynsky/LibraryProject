@@ -48,4 +48,9 @@ public class AuthorServiceImpl implements AuthorService {
     public List<Author> listAuthor() {
         return this.authorDAO.findAll(Author.class);
     }
+
+    @Override
+    public Author getAuthorByFullName(String[] fullName) {
+        return authorDAO.findByFullName(fullName);
+    }
 }
