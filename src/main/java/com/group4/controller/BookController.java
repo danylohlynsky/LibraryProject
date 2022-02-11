@@ -17,33 +17,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class BookController {
 
     private final BookService bookService;
-    private final AuthorService authorService;
 
     @Autowired
-    public BookController(BookService bookService, AuthorService authorService) {
+    public BookController(BookService bookService) {
         this.bookService = bookService;
-        this.authorService = authorService;
     }
 
 
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public String listBooks(Model model) {
-        // Test services and dao
-        Author author1 = new Author();
-        author1.setFirstName("Dan");
-        author1.setLastName("Brown");
-        authorService.addAuthor(author1);
-        Author author2 = new Author();
-        author2.setFirstName("Taras");
-        author2.setLastName("Shevchenko");
-        authorService.addAuthor(author2);
-        Book book1 = new Book();
-        book1.setTitle("Origin");
-        book1.setAvailableAmount(3);
-        book1.setMainAuthor(author1);
-        bookService.addBook(book1);
-
         model.addAttribute("book", new Book());
         model.addAttribute("listBooks", this.bookService.listBook());
 
@@ -58,14 +41,14 @@ public class BookController {
             this.bookService.updateBook(book);
         }
 
-        return "/WEB-INF/views/book-list.html";
+        return "book-list";
     }
 
     @RequestMapping("/remove/{id}")
     public String removeBook(@PathVariable("id") int id) {
         this.bookService.removeBook(id);
 
-        return "/WEB-INF/views/book-list.html";
+        return "book-list";
     }
 
     @RequestMapping("edit/{id}")
@@ -73,7 +56,7 @@ public class BookController {
         model.addAttribute("book", this.bookService.getBookById(id));
         model.addAttribute("listBooks", this.bookService.listBook());
 
-        return "/WEB-INF/views/book-list.html";
+        return "book-list";
     }
 
     @RequestMapping("bookdate/{id}")
