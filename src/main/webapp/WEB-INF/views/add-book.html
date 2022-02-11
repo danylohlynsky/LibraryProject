@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Add book</title>
+    </head>
+    <body>
+        <a href="/">Home</a> |
+        <a href="/books">Show all books</a>
+        <form action="/books/add" method="post">
+            <table>
+                <tr>
+                    <td>
+                        <label for = "title"> Title: </label>
+                    </td>
+                    <td>
+                        <input type="text" id = "title" name = "title">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for = "authorFullName"> Author: </label>
+                    </td>
+                    <td>
+                        <input type="text" id = "authorFullName" name = "authorFullName">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for = "availableAmount"> Available amount: </label>
+                    </td>
+                    <td>
+                        <input type="text" id = "availableAmount" name = "availableAmount">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Create">
+                    </td>
+                    <td>
+                        <input type="reset" value="Clear">
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    </body>
+</html>
