@@ -12,7 +12,7 @@ import java.util.List;
 public class DAOImpl<T> implements DAO<T> {
     public LocalSessionFactoryBean localSessionFactoryBean;
 
-    private SessionFactory sessionFactory;
+    protected SessionFactory sessionFactory;
 
 
     @Autowired
