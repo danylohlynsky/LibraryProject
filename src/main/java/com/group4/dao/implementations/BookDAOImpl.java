@@ -18,7 +18,6 @@ import java.util.List;
 @Repository
 @Transactional
 public class BookDAOImpl extends DAOImpl<Book> implements BookDAO {
-    @Autowired
     public BookDAOImpl(LocalSessionFactoryBean localSessionFactoryBean) {
         super(localSessionFactoryBean);
     }
