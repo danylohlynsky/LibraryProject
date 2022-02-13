@@ -22,11 +22,22 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     @Transactional
     public void addAuthor(Author author) {
-        if(author.getId() == 0) {
+        if(validateAuthor(author)) {
             this.authorDAO.save(author);
-        } else if (authorDAO.findById(author.getId(), Book.class) != null) {
-            this.authorDAO.update(author);
+        } else if (!validateAuthor(author)) {
+            if (author.getId() != 0) {
+                this.authorDAO.update(author);
+            }
         }
+    }
+
+    private boolean validateAuthor(Author author) {
+        return authorDAO.findAll(Author.class)
+                .stream()
+                .filter(aut -> aut.getFirstName().equals(author.getFirstName())
+                        && aut.getLastName().equals(author.getLastName()))
+                .findAny()
+                .isEmpty();
     }
 
     @Override

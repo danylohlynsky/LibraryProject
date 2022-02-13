@@ -56,7 +56,7 @@ public class DAOImpl<T> implements DAO<T> {
 
     @Override
     public List<T> findAll(Class clazz) {
-        List objects = null;
+        List<T> objects = null;
         Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();

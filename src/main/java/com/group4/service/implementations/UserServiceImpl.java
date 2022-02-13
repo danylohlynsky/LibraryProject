@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public List<User> findAll() {
-        return null;
+        return userDao.findAll(User.class);
     }
 
     @Override

@@ -45,8 +45,8 @@ public class BookController {
         if (result.hasErrors()) {
             return "create-book";
         }
-        book.setMainAuthor(author);
         authorService.addAuthor(author);
+        book.setMainAuthor(author);
         bookService.addBook(book);
         return "redirect:/books";
     }

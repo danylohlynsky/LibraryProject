@@ -1,39 +1,77 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/template}"
-      lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <meta charset="UTF-8">
-    <title>List of Users</title>
+    <title>List of users</title>
 </head>
 <body>
-<div layout:fragment="content" style="margin: 0 auto; width: max-content">
-    <h2>New User registration</h2>
-    <form th:action="@{/users/create-user}" method="get">
-        <input type="submit" value="Create new User">
-    <br>
-    <table border="1">
+<div class="container">
+    <a href="/"><br>Home</a>
+    <h2><br>List of users</h2>
+    <table class="table">
         <thead>
         <tr>
-            <th>No.</th>
-            <th>Id</th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th colspan="2">Operation</th>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Reg Date</th>
+            <th colspan="2">Operations</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user,iStat: ${users}">
-            <td th:text="${iStat.index + 1}"></td>
+        <tr th:each="user, el: ${users}">
+            <td th:text="${el.index + 1}"></td>
             <td th:text="${user.id}"></td>
             <td th:text="${user.firstName}"></td>
             <td th:text="${user.lastName}"></td>
-            <td><a th:href="@{|/user-update/{id}(id=${user.id})|}">Edit</a></td>
-            <td><a th:href="@{|/user-delete/{id}(id=${user.id})|}">Delete</a></td>
+            <td th:text="${user.age}"></td>
+            <td th:text="${user.registrationDate}"></td>
+            <td>
+                <a th:href="@{|/users/update/${user.getId()}|}">Update</a>
+            </td>
+            <td>
+                <a th:href="@{|/users/remove/${user.getId()}|}">Delete</a>
+            </td>
         </tr>
         </tbody>
     </table>
-    </form>
-</body>
+    <span>
+           <a th:href="@{|/users/add|}">Add new user</a>
+    </span>
+</div>
+
+
+
+
+<!--<div layout:fragment="content" style="margin: 0 auto; width: max-content">-->
+<!--    <h2>New User registration</h2>-->
+<!--    <form th:action="@{/users/create-user}" method="get">-->
+<!--        <input type="submit" value="Create new User">-->
+<!--    <br>-->
+<!--    <table border="1">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>No.</th>-->
+<!--            <th>Id</th>-->
+<!--            <th>First name</th>-->
+<!--            <th>Last name</th>-->
+<!--            <th colspan="2">Operation</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="user,iStat: ${users}">-->
+<!--            <td th:text="${iStat.index + 1}"></td>-->
+<!--            <td th:text="${user.id}"></td>-->
+<!--            <td th:text="${user.firstName}"></td>-->
+<!--            <td th:text="${user.lastName}"></td>-->
+<!--            <td><a th:href="@{|/user-update/{id}(id=${user.id})|}">Edit</a></td>-->
+<!--            <td><a th:href="@{|/user-delete/{id}(id=${user.id})|}">Delete</a></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--    </form>-->
+<!--</body>-->
 </html>
