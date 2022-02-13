@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Authors list</title>
+</head>
+<body>
+
+<div class="container">
+    <a href="/"><br>Home</a>
+    <h2><br>Authors list:</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th colspan="4" >Operations</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="author, el: ${listAuthor}">
+            <td th:text="${el.index + 1}"></td>
+            <td th:text="${author.id}"></td>
+            <td th:text="${author.firstName}"></td>
+            <td th:text="${author.lastName}"></td>
+            <td>
+                <a th:href="@{|/authors/update/${author.getId()}|}">Update</a>
+            </td>
+            <td>
+                <a th:href="@{|/authors/remove/${author.getId()}|}">Delete</a>
+            </td>
+            <td>
+                <a href="#">Books</a>
+            </td>
+            <td>
+                <a href="#">Co-books</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <span>
+           <a th:href="@{|/author/add|}">Add new author</a>
+    </span>
+</div>
+</body>
+</html>
