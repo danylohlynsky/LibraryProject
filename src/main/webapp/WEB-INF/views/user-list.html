@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/template}"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Users</title>
+</head>
+<body>
+<div layout:fragment="content" style="margin: 0 auto; width: max-content">
+    <h2>New User registration</h2>
+    <form th:action="@{/users/create-user}" method="get">
+        <input type="submit" value="Create new User">
+    <br>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Id</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th colspan="2">Operation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user,iStat: ${users}">
+            <td th:text="${iStat.index + 1}"></td>
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td><a th:href="@{|/user-update/{id}(id=${user.id})|}">Edit</a></td>
+            <td><a th:href="@{|/user-delete/{id}(id=${user.id})|}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
+</body>
+</html>

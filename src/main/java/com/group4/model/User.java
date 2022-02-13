@@ -36,7 +36,7 @@ public class User {
     @Column(nullable = false)
     int age;
 
-    @Column(name = "rwgistration_date", nullable = false)
+    @Column(name = "registration_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     Date registrationDate;
 }
