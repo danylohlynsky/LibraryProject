@@ -23,12 +23,9 @@ public class BookController {
         this.authorService = authorService;
     }
 
-
-
-    @RequestMapping(value = "/books", method = RequestMethod.GET)
+    @GetMapping(value = "/books")
     public String listBooks(Model model) {
         model.addAttribute("listBooks", this.bookService.listBook());
-
         return "book-list";
     }
 
@@ -80,4 +77,6 @@ public class BookController {
 
         return "bookdate";
     }
+
+
 }

@@ -1,39 +1,54 @@
-<html>
-    <head>
-        <title>Book list</title>
-    </head>
-    <body>
-        <a href="/">Home</a> |
-        <a href="/books">Show all books</a> |
-        <br>
-        <h2>Book list:</h2>
-        <form action="book-list">
-            <table border="1">
-                <tr>
-                    <th>Title</th>
-                    <th>Available</th>
-                    <th>Author</th>
-                    <th colspan="3">Operation</th>
-                </tr>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Books list</title>
+    <style>
+        .center {
+            text-align: center; /* Выравнивание по центру */
+        }
+    </style>
+</head>
+<body>
 
-                <tr th:each = "book: ${listBooks}">
-                    <td th:text="${book.getTitle()}"> />
-                    <td th:text="${book.getAvailableAmount()}"></td>
-                    <td th:text="${book.getMainAuthor().getFirstName()} + ' ' + ${book.getMainAuthor().getLastName()}"></td>
-                    <td>
-                        <a th:href = "@{'/update-book/' + ${book.getId()}}">Update</a>
-                    </td>
-                    <td>
-                        <a th:href = "@{'/read-task/' + ${book.getId()}}">Edit</a>
-                    </td>
-                    <td>
-                        <a th:href = "@{'/remove-book/' + ${book.getId()}}">Delete</a>
-                    </td>
-                </tr>
-            </table>
-        </form>
+<div class="container">
+    <a href="/"><br>Home</a>
+    <h2><br>Book list:</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Available</th>
+            <th colspan="3" >Operations</th>
 
-        <a href="/books/add">Add new book</a>
-
-    </body>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book, el: ${listBooks}">
+            <td th:text="${el.index + 1}"></td>
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.mainAuthor.getLastName() + ' ' + book.mainAuthor.getFirstName()}"></td>
+            <td th:text="${book.availableAmount}"></td>
+            <td>
+                <a th:href="@{|/update-book/${book.getId()}|}">Update</a>
+            </td>
+            <td>
+                <a th:href="@{|/read-task/${book.getId()}|}">Take book</a>
+            </td>
+            <td>
+                <a th:href="@{|/remove-book/${book.getId()}|}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <span>
+           <a th:href="@{|/books/add|}">Add new book</a>
+    </span>
+</div>
+</body>
 </html>
