@@ -4,13 +4,14 @@ import com.group4.model.User;
 import java.util.List;
 
 public interface UserService {
-    void addBook(User user);
+    User findById(int id);
 
-    void updateBook(User user);
+    List<User> findAll();
 
-    void removeBook(int id);
+    void saveUser(User user);
 
-    User getUserById(int id);
+    User deleteById(int id);
 
-    List<User> listUser();
+
+
 }

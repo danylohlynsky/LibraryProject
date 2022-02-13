@@ -32,6 +32,7 @@ public class BookController {
         return "book-list";
     }
 
+
     @RequestMapping(value = "/books/add", method = RequestMethod.GET)
     public String toAddPage() {
         return "add-book";

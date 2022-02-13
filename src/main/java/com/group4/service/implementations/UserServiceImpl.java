@@ -20,33 +20,57 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
     }
 
+//    @Override
+//    @Transactional
+//    public void addBook(User user) {
+//        this.userDao.save(user);
+//    }
+//
+//    @Override
+//    @Transactional
+//    public void updateBook(User user) {
+//        this.userDao.update(user);
+//    }
+//
+//    @Override
+//    @Transactional
+//    public void removeBook(int id) {
+//        this.userDao.deleteById(id, User.class);
+//    }
+//
+//    @Override
+//    @Transactional
+//    public User getUserById(int id) {
+//        return (User) this.userDao.findById(id, User.class);
+//    }
+//
+//    @Override
+//    @Transactional
+//    public List<User> listUser() {
+//        return this.userDao.findAll(User.class);
+//    }
+
     @Override
     @Transactional
-    public void addBook(User user) {
-        this.userDao.save(user);
+    public User findById(int id) {
+        return null;
     }
 
     @Override
     @Transactional
-    public void updateBook(User user) {
-        this.userDao.update(user);
+    public List<User> findAll() {
+        return null;
     }
 
     @Override
     @Transactional
-    public void removeBook(int id) {
-        this.userDao.deleteById(id, User.class);
+    public void saveUser(User user) {
+
     }
 
     @Override
     @Transactional
-    public User getUserById(int id) {
-        return (User) this.userDao.findById(id, User.class);
-    }
-
-    @Override
-    @Transactional
-    public List<User> listUser() {
-        return this.userDao.findAll(User.class);
+    public User deleteById(int id) {
+        return null;
     }
 }
