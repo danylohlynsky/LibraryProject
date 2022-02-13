@@ -7,11 +7,14 @@ import com.group4.service.interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 
 @Controller
+@RequestMapping("/books")
 public class BookController {
 
     private final BookService bookService;
@@ -23,61 +26,41 @@ public class BookController {
         this.authorService = authorService;
     }
 
-    @GetMapping(value = "/books")
+    @GetMapping
     public String listBooks(Model model) {
         model.addAttribute("listBooks", this.bookService.listBook());
-        return "book-list";
+        return "list-books";
     }
 
 
-    @RequestMapping(value = "/books/add", method = RequestMethod.GET)
-    public String toAddPage() {
-        return "add-book";
+    @GetMapping(value = "/add")
+    public String create(Model model) {
+        model.addAttribute("book", new Book());
+        model.addAttribute("author",new Author());
+        return "create-book";
     }
 
-
-    @RequestMapping(value = "/books/add", method = RequestMethod.POST)
-    @ResponseBody
-    public RedirectView  addBook(@RequestParam String title, @RequestParam String authorFullName, @RequestParam String availableAmount) {
-        Book newBook = new Book();
-        newBook.setTitle(title);
-        newBook.setAvailableAmount(Integer.parseInt(availableAmount));
-        String[] nameSurName = authorFullName.split(" ");
-        Author author = authorService.getAuthorByFullName(nameSurName);
-        if(author != null) {
-            newBook.setMainAuthor(author);
-        } else {
-            author = new Author();
-            author.setFirstName(nameSurName[0]);
-            author.setLastName(nameSurName[1]);
-            authorService.addAuthor(author);
-            newBook.setMainAuthor(author);
+    @PostMapping(value = "/add")
+    public String create(@Validated @ModelAttribute ("author") Author author, @Validated @ModelAttribute("book") Book book, BindingResult result) {
+        if (result.hasErrors()) {
+            return "create-book";
         }
-        this.bookService.addBook(newBook);
-        return new RedirectView("/books");
+        book.setMainAuthor(author);
+        authorService.addAuthor(author);
+        bookService.addBook(book);
+        return "redirect:/books";
     }
 
-    @RequestMapping("/remove-book/{id}")
+    @GetMapping("/remove/{id}")
     public RedirectView removeBook(@PathVariable("id") int id) {
         this.bookService.removeBook(id);
-
         return new RedirectView("/books");
     }
 
-    @RequestMapping("edit/{id}")
-    public String editBook(@PathVariable("id") int id, Model model) {
-        model.addAttribute("book", this.bookService.getBookById(id));
-        model.addAttribute("listBooks", this.bookService.listBook());
-
-        return "book-list";
+    @GetMapping("update/{id}")
+    public String update(@PathVariable("id") int id, Model model) {
+        model.addAttribute("book", bookService.getBookById(id));
+        model.addAttribute("author", bookService.getBookById(id).getMainAuthor());
+        return "update-book";
     }
-
-    @RequestMapping("bookdate/{id}")
-    public String bookDate(@PathVariable("id") int id, Model model) {
-        model.addAttribute("book", this.bookService.getBookById(id));
-
-        return "bookdate";
-    }
-
-
 }

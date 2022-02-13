@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Add book</title>
+</head>
+<body>
+<div class="container">
+    <a href="/"><br>Home</a> |
+    <a href="/books">Show all books</a>
+    <div class="col-md-offset-2">
+        <h2>Create new book</h2>
+    </div>
+    <form class="container" th:action="@{/books/add}" th:object="${book}" method="post">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="title">Title:</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" th:field="*{title}" id="title"/>
+                <small th:type="text" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></small>
+            </div>
+        </div>
+        <br>
+        <div class="form-group" th:object="${author}">
+            <label class="col-sm-3 control-label" for="firstName">Author FirstName:</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" th:field="*{firstName}" id="firstName"/>
+                <small th:type="text" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></small>
+            </div>
+        </div>
+        <br>
+        <div class="form-group" th:object="${author}">
+            <label class="col-sm-3 control-label" for="lastName">Author LastName:</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" th:field="*{lastName}" id="lastName"/>
+                <small th:type="text" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></small>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="availableAmount">Available:</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" th:field="*{availableAmount}" id="availableAmount"/>
+                <small th:type="text" th:if="${#fields.hasErrors('availableAmount')}"
+                       th:errors="*{availableAmount}"></small>
+            </div>
+        </div>
+        <br>
+        <div class="col-sm-offset-3 col-sm-8">
+            <input type="submit" class="btn btn-info" value="Register"/>
+            <input type="reset" class="btn btn" value="Clear"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>

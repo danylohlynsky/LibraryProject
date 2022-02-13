@@ -23,7 +23,11 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public void addBook(Book book) {
-        this.bookDao.save(book);
+        if(book.getId() == 0) {
+            this.bookDao.save(book);
+        } else if (bookDao.findById(book.getId(), Book.class) != null) {
+            this.bookDao.update(book);
+        }
     }
 
     @Override

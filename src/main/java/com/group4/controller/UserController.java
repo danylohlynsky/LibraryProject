@@ -5,7 +5,6 @@ import com.group4.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,7 +41,7 @@ public class UserController {
     public String updateUserForm(@PathVariable("id") int id, Model model) {
         User user = userService.findById(id);
         model.addAttribute("user", user);
-        return "user-update";
+        return "update-user";
     }
 
     @PostMapping("/user-update")
@@ -56,7 +55,7 @@ public class UserController {
 //        return "users-list";
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
-        return "user-list";
+        return "list-users";
     }
 
 

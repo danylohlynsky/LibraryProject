@@ -4,11 +4,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <title>Books list</title>
-    <style>
-        .center {
-            text-align: center; /* Выравнивание по центру */
-        }
-    </style>
 </head>
 <body>
 
@@ -35,13 +30,13 @@
             <td th:text="${book.mainAuthor.getLastName() + ' ' + book.mainAuthor.getFirstName()}"></td>
             <td th:text="${book.availableAmount}"></td>
             <td>
-                <a th:href="@{|/update-book/${book.getId()}|}">Update</a>
+                <a th:href="@{|/books/update/${book.getId()}|}">Update</a>
             </td>
             <td>
-                <a th:href="@{|/read-task/${book.getId()}|}">Take book</a>
+                <a th:href="@{|/books/read/${book.getId()}|}">Take book</a>
             </td>
             <td>
-                <a th:href="@{|/remove-book/${book.getId()}|}">Delete</a>
+                <a th:href="@{|/books/remove/${book.getId()}|}">Delete</a>
             </td>
         </tr>
         </tbody>
