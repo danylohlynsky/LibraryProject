@@ -1,6 +1,7 @@
 package com.group4.dao.implementations;
 
 import com.group4.dao.interfaces.UserDAO;
+import com.group4.model.Book;
 import com.group4.model.User;
 
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -13,6 +14,10 @@ import java.util.List;
 public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
     public UserDAOImpl(LocalSessionFactoryBean localSessionFactoryBean) {
         super(localSessionFactoryBean);
+    }
+
+    public List<User> findAll() {
+        return super.findAll(User.class);
     }
 
 /*

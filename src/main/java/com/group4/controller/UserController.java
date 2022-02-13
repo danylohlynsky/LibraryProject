@@ -1,13 +1,14 @@
 package com.group4.controller;
-
 import com.group4.model.User;
 import com.group4.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 @Controller
 @RequestMapping("users")
@@ -19,14 +20,23 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user-create")
+    @GetMapping
+    public String listUser(Model model) {
+        model.addAttribute("users", this.userService.listUser());
+        return "list-users";
+    }
+
+    @GetMapping("/add")
     public String createUserForm(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", this.userService.listUser());
         return "create-user";
     }
 
-    @PostMapping("/user-create")
-    public String createUser(User user) {
+    @PostMapping("/add")
+    public String createUser(@Validated @ModelAttribute("user") User user, BindingResult result) {
+        if (result.hasErrors()){
+            return "create-user";
+        }
         userService.saveUser(user);
         return "redirect:/users";
     }
@@ -49,12 +59,7 @@ public class UserController {
 //        userService.saveUser(user);
 //        return "redirect:/users";
 //    }
-    @GetMapping
-    public String findAll(Model model) {
-        List<User> users = userService.findAll();
-        model.addAttribute("users", users);
-        return "list-users";
-    }
+
 
 
 }
