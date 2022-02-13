@@ -66,6 +66,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    @Transactional
     public Author getAuthorByFullName(String[] fullName) {
         return authorDAO.findByFullName(fullName);
     }
