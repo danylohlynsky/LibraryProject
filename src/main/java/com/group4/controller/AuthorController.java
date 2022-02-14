@@ -31,7 +31,7 @@ public class AuthorController {
 
     @GetMapping(value = "/add")
     public String create(Model model) {
-        model.addAttribute("author", this.authorService.listAuthor());
+        model.addAttribute("author", new Author());
         return "create-author";
     }
 

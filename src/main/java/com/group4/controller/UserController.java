@@ -28,7 +28,7 @@ public class UserController {
 
     @GetMapping("/add")
     public String createUserForm(Model model) {
-        model.addAttribute("user", this.userService.listUser());
+        model.addAttribute("user", new User());
         return "create-user";
     }
 

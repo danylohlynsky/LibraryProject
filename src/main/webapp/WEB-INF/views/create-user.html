@@ -8,27 +8,11 @@
 <body>
 <div class="container">
     <a href="/"><br>Home</a> |
-    <a href="/books">Show all users</a>
+    <a href="/users">Show all users</a>
     <div class="col-md-offset-2">
         <h2>Create new user</h2>
     </div>
     <form class="container" th:action="@{/users/add}" th:object="${user}" method="post">
-        <div class="form-group">
-            <label class="col-sm-3 control-label" for="age">Age:</label>
-            <div class="col-sm-7">
-                <input type="text" class="form-control" th:field="*{age}" id="Age"/>
-                <small th:type="text" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></small>
-            </div>
-        </div>
-        <br>
-        <div class="form-group">
-            <label class="col-sm-3 control-label" for="email">User Email:</label>
-            <div class="col-sm-7">
-                <input type="text" class="form-control" th:field="*{email}" id="email"/>
-                <small th:type="text" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
-            </div>
-        </div>
-        <br>
         <div class="form-group">
             <label class="col-sm-3 control-label" for="firstName">User FirstName:</label>
             <div class="col-sm-7">
@@ -46,10 +30,26 @@
         </div>
         <br>
         <div class="form-group">
+            <label class="col-sm-3 control-label" for="email">User Email:</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" th:field="*{email}" id="email"/>
+                <small th:type="text" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
             <label class="col-sm-3 control-label" for="password">Password:</label>
             <div class="col-sm-7">
                 <input type="text" class="form-control" th:field="*{password}" id="password"/>
                 <small th:type="text" th:if="${#fields.hasErrors('password')}"th:errors="*{password}"></small>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="age">Age:</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" th:field="*{age}" id="Age"/>
+                <small th:type="text" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></small>
             </div>
         </div>
         <br>
