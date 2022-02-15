@@ -2,7 +2,6 @@ package com.group4.controller;
 
 import com.group4.model.Author;
 import com.group4.service.interfaces.AuthorService;
-import com.group4.service.interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +24,7 @@ public class AuthorController {
     @GetMapping
     public String listAuthor(Model model) {
         model.addAttribute("listAuthor", this.authorService.listAuthor());
-        return "list-author";
+        return "list-authors";
 
     }
 

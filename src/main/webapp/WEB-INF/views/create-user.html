@@ -41,14 +41,14 @@
             <label class="col-sm-3 control-label" for="password">Password:</label>
             <div class="col-sm-7">
                 <input type="text" class="form-control" th:field="*{password}" id="password"/>
-                <small th:type="text" th:if="${#fields.hasErrors('password')}"th:errors="*{password}"></small>
+                <small th:type="text" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
             </div>
         </div>
         <br>
         <div class="form-group">
             <label class="col-sm-3 control-label" for="age">Age:</label>
             <div class="col-sm-7">
-                <input type="text" class="form-control" th:field="*{age}" id="Age"/>
+                <input type="text" class="form-control" th:field="*{age}" id="age"/>
                 <small th:type="text" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></small>
             </div>
         </div>
@@ -56,8 +56,11 @@
         <div class="form-group">
             <label class="col-sm-3 control-label" for="registrationDate">User Registration date:</label>
             <div class="col-sm-7">
-                <input type="text" class="form-control" th:field="*{registrationDate}" id="registrationDate"/>
-                <small th:type="text" th:if="${#fields.hasErrors('registrationDate')}"th:errors="*{registrationDate}"></small>
+            <div id="registrationDate" class="md-form md-outline input-with-post-icon datepicker" inline="true">
+                <input placeholder="Select date" type="text" id="example" class="form-control">
+                <label for="example">Reg date</label>
+                <i class="fas fa-calendar input-prefix"></i>
+            </div>
             </div>
         </div>
         <div class="col-sm-offset-3 col-sm-8">
