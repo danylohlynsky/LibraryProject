@@ -9,7 +9,7 @@
 
 <div class="container">
     <a href="/"><br>Home</a>
-    <h2><br>Books list</h2>
+    <h2><br>Book Details</h2>
     <table class="table">
         <thead>
         <tr>
@@ -18,34 +18,19 @@
             <th scope="col">Title</th>
             <th scope="col">Author</th>
             <th scope="col">Available</th>
-            <th colspan="3" >Operations</th>
+<!--            <th colspan="3" >Operations</th>-->
         </tr>
         </thead>
         <tbody>
-        <tr th:each="book, el: ${listBooks}">
+        <tr th:each="book, el: ${book}">
             <td th:text="${el.index + 1}"></td>
             <td th:text="${book.id}"></td>
             <td th:text="${book.title}"></td>
             <td th:text="${book.mainAuthor.getLastName() + ' ' + book.mainAuthor.getFirstName()}"></td>
             <td th:text="${book.availableAmount}"></td>
-            <td>
-                <a th:href="@{|/books/update/${book.getId()}|}">Update</a>
-            </td>
-            <td>
-                <a th:href="@{|/books/read/${book.getId()}|}">Take book</a>
-            </td>
-            <td>
-                <a th:href="@{|/books/remove/${book.getId()}|}">Delete</a>
-            </td>
-            <td>
-                <a th:href="@{|/books/book-date/${book.getId()}|}">Book Details</a>
-            </td>
         </tr>
         </tbody>
     </table>
-    <span>
-           <a th:href="@{|/books/add|}">Add new book</a>
-    </span>
 </div>
 </body>
 </html>
