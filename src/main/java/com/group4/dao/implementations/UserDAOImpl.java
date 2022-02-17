@@ -1,13 +1,18 @@
 package com.group4.dao.implementations;
 
 import com.group4.dao.interfaces.UserDAO;
+import com.group4.model.Author;
 import com.group4.model.Book;
 import com.group4.model.User;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Repository
@@ -20,28 +25,26 @@ public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
         return super.findAll(User.class);
     }
 
-/*
+    public User findByMail(String email) {
+        Session session = sessionFactory.openSession();
+        try {
+            session.beginTransaction();
 
-    @Override
-    public User getUserById(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        User user = session.load(User.class, id);
-        logger.info("User successfully loaded. User details: " + user);
-
-        return user;
-    }
-
-*/
-/*
-    @Override
-    public List<User> listUsers() {
-        Session session = this.sessionFactory.getCurrentSession();
-        List<User> userList = session.createQuery("from User").list();
-
-        for (User user : userList) {
-            logger.info("User list: " + user);
+            Query query = session.createQuery(
+                    "from User U where U.email like :email"
+            );
+            query.setParameter("email", email);
+            List<User> users = query.list();
+            User user = users.get(0);
+            session.getTransaction().commit();
+            return user;
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+            System.out.println("Error performing JPA operation. Transaction is rolled back");
+        } finally {
+            session.close();
         }
-        return userList;
+        return null;
     }
-*/
 }

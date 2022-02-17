@@ -5,5 +5,5 @@ import com.group4.model.User;
 import java.util.List;
 
 public interface UserDAO extends DAO<User> {
-
+    User findByMail(String email);
 }
