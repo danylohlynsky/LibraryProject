@@ -63,4 +63,11 @@ public class BookController {
         model.addAttribute("author", bookService.getBookById(id).getMainAuthor());
         return "update-book";
     }
+
+    @GetMapping("book-date/{id}")
+    public String bookData(@PathVariable("id")int id, Model model){
+        model.addAttribute("book", bookService.getBookById(id));
+
+        return "book-date";
+    }
 }
