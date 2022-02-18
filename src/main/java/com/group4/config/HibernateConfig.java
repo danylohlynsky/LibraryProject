@@ -1,5 +1,7 @@
 package com.group4.config;
 
+import com.group4.model.Role;
+import com.group4.model.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -17,6 +19,7 @@ public class HibernateConfig {
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
+
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(
@@ -45,7 +48,7 @@ public class HibernateConfig {
 
     private Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create");
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
         hibernateProperties.setProperty("hibernate.show_sql", "true");
         return hibernateProperties;

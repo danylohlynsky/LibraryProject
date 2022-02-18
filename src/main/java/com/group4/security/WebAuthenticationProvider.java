@@ -2,7 +2,6 @@ package com.group4.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,17 +24,13 @@ public class WebAuthenticationProvider implements AuthenticationProvider {
 
         UserDetails userDetails = userService.loadUserByUsername(username);
         if (password.equals(userDetails.getPassword())) {
-            return new UsernamePasswordAuthenticationToken(
-                    userDetails.getUsername(),
-                    userDetails.getPassword(),
-                    userDetails.getAuthorities()
-            );
+            return new WebAuthenticationToken(userDetails);
         }
         return null;
     }
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return true;
+        return false;
     }
 }
