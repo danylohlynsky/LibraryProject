@@ -35,12 +35,12 @@ public class BookController {
     @GetMapping(value = "/add")
     public String create(Model model) {
         model.addAttribute("book", new Book());
-        model.addAttribute("author",new Author());
+        model.addAttribute("author", new Author());
         return "create-book";
     }
 
     @PostMapping(value = "/add")
-    public String create(@Validated @ModelAttribute ("author") Author author, @Validated @ModelAttribute("book") Book book, BindingResult result) {
+    public String create(@Validated @ModelAttribute("author") Author author, @Validated @ModelAttribute("book") Book book, BindingResult result) {
         if (result.hasErrors()) {
             return "create-book";
         }
@@ -64,9 +64,16 @@ public class BookController {
     }
 
     @GetMapping("book-date/{id}")
-    public String bookData(@PathVariable("id")int id, Model model){
+    public String bookData(@PathVariable("id") int id, Model model) {
         model.addAttribute("book", bookService.getBookById(id));
 
         return "book-date";
     }
+
+    @GetMapping("take-book/{id}")
+    public String getBook(@PathVariable("id") int id, Model model) {
+        model.addAttribute("book", bookService.getBookById(id));
+        return "take-book";
+    }
+
 }
