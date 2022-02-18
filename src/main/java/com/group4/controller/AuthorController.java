@@ -2,6 +2,7 @@ package com.group4.controller;
 
 import com.group4.model.Author;
 import com.group4.service.interfaces.AuthorService;
+import com.group4.service.interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +16,11 @@ import org.springframework.web.servlet.view.RedirectView;
 public class AuthorController {
 
     private final AuthorService authorService;
-
+    private final BookService bookService;
     @Autowired
-    public AuthorController(AuthorService authorService) {
+    public AuthorController(AuthorService authorService, BookService bookService) {
         this.authorService = authorService;
+        this.bookService = bookService;
     }
 
     @GetMapping
@@ -53,5 +55,11 @@ public class AuthorController {
     public String update(@PathVariable("id") int id, Model model) {
         model.addAttribute("author", authorService.getAuthorById(id));
         return "update-author";
+    }
+    @GetMapping("books-show/{id}")
+    public String showBooks(@PathVariable("id") int id,Model model){
+        model.addAttribute("book",bookService.getBookById(id));
+
+        return "book-show";
     }
 }
