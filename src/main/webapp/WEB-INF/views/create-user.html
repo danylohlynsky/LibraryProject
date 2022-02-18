@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
     <meta charset="UTF-8">
     <title>Add user</title>
 </head>
@@ -54,13 +55,9 @@
         </div>
         <br>
         <div class="form-group">
-            <label class="col-sm-3 control-label" for="registrationDate">User Registration date:</label>
+            <label class="col-sm-3 control-label" for="inputDate">Age:</label>
             <div class="col-sm-7">
-            <div id="registrationDate" class="md-form md-outline input-with-post-icon datepicker" inline="true">
-                <input placeholder="Select date" type="text" id="example" class="form-control">
-                <label for="example">Reg date</label>
-                <i class="fas fa-calendar input-prefix"></i>
-            </div>
+                <input type="date" class="form-control" id="inputDate">
             </div>
         </div>
         <div class="col-sm-offset-3 col-sm-8">
@@ -71,18 +68,6 @@
 </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!--<!DOCTYPE html>-->
