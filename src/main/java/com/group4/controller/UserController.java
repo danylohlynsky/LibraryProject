@@ -1,5 +1,6 @@
 package com.group4.controller;
 import com.group4.model.User;
+import com.group4.service.MailSender;
 import com.group4.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,6 +45,12 @@ public class UserController {
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") int id) {
         userService.deleteById(id);
+        return "redirect:/users";
+    }
+
+    @GetMapping("/send-email/{id}")
+    public String sendMailUser(@PathVariable("id") int id) {
+        MailSender.sendEmail(userService.findById(id).getEmail(), "Notification from library", "Hope you are alive");
         return "redirect:/users";
     }
 
