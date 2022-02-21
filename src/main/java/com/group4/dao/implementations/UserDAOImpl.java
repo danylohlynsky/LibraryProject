@@ -35,7 +35,9 @@ public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
             );
             query.setParameter("email", email);
             List<User> users = query.list();
-            User user = users.get(0);
+            User user = null;
+            if (users.size() >= 1)
+                user = users.get(0);
             session.getTransaction().commit();
             return user;
         } catch (Exception e) {

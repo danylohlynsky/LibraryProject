@@ -25,17 +25,13 @@ public class WebAuthenticationProvider implements AuthenticationProvider {
 
         UserDetails userDetails = userService.loadUserByUsername(username);
         if (password.equals(userDetails.getPassword())) {
-            return new UsernamePasswordAuthenticationToken(
-                    userDetails.getUsername(),
-                    userDetails.getPassword(),
-                    userDetails.getAuthorities()
-            );
+            return new WebAuthenticationToken(userDetails);
         }
         return null;
     }
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return true;
+        return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }
