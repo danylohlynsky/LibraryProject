@@ -25,7 +25,10 @@
         <tr th:each="user, el: ${users}">
             <td th:text="${el.index + 1}"></td>
             <td th:text="${user.id}"></td>
-            <td th:text="${user.firstName}"></td>
+            <td>
+                <a th:href="@{|/users/user-date/${user.getId()}|}" th:text="${user.firstName}"></a>
+            </td>
+<!--            <td th:text="${user.firstName}"></td>-->
             <td th:text="${user.lastName}"></td>
             <td th:text="${user.age}"></td>
             <td th:text="${user.registrationDate}"></td>
