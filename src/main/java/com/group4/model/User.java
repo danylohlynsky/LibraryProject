@@ -12,6 +12,10 @@ import java.util.Date;
 @Setter
 @Table(name = "users")
 public class User {
+    public User() {
+        registrationDate = new Date();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

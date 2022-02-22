@@ -76,7 +76,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void saveUser(User user) {
         this.userDao.save(user);
-
     }
 
     @Override
