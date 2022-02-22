@@ -34,6 +34,6 @@ class RoleServiceImpl implements RoleService {
     @Override
     @Transactional
     public List<Role> listRoles() {
-        return this.roleDAO.findAll(Book.class);
+        return this.roleDAO.findAll(Role.class);
     }
 }

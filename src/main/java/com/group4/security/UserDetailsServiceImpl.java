@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +29,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String userMail) throws UsernameNotFoundException {
-        User user = userDao.findByMail(userMail);
+        User user = null;
+        try {
+            user = userDao.findByMail(userMail);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         if (user == null) {
             throw new UsernameNotFoundException("User not found!");
         }

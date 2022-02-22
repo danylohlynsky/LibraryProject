@@ -1,18 +1,14 @@
 package com.group4.dao.implementations;
 
 import com.group4.dao.interfaces.UserDAO;
-import com.group4.model.Author;
-import com.group4.model.Book;
 import com.group4.model.User;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Repository
