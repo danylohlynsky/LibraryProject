@@ -33,7 +33,7 @@
             <td th:text="${user.age}"></td>
             <td th:text="${user.registrationDate}"></td>
             <td>
-                <a th:href="@{|/users/update/${user.getId()}|}">Update</a>
+                <a th:href="@{|/users/user-update/${user.getId()}|}">Update</a>
             </td>
             <td>
                 <a th:href="@{|/users/remove/${user.getId()}|}">Delete</a>

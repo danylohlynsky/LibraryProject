@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.servlet.view.RedirectView;
 
 
 @Controller
@@ -42,11 +42,13 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") int id) {
-        userService.deleteById(id);
-        return "redirect:/users";
+    @GetMapping("/remove/{id}")
+    public RedirectView deleteUser(@PathVariable("id") int id) {
+        this.userService.deleteById(id);
+        return new RedirectView("/users");
+//        return "redirect:/users";
     }
+
 
     @GetMapping("/send-email/{id}")
     public String sendMailUser(@PathVariable("id") int id) {
@@ -58,6 +60,11 @@ public class UserController {
         model.addAttribute("user", userService.findById(id));
 
         return "user-info";
+    }
+    @GetMapping("user-update/{id}")
+    public String update(@PathVariable("id") int id, Model model) {
+        model.addAttribute("author", userService.findById(id));
+        return "update-user";
     }
 
 //    @GetMapping("/user-update/{id}")
