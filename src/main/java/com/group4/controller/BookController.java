@@ -67,7 +67,7 @@ public class BookController {
     public String bookData(@PathVariable("id") int id, Model model) {
         model.addAttribute("book", bookService.getBookById(id));
 
-        return "book-date";
+        return "book-info";
     }
 
     @GetMapping("take-book/{id}")
