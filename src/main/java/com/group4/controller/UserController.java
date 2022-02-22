@@ -53,6 +53,12 @@ public class UserController {
         MailSender.sendEmail(userService.findById(id).getEmail(), "Notification from library", "Hope you are alive");
         return "redirect:/users";
     }
+    @GetMapping("user-date/{id}")
+    public String bookData(@PathVariable("id") int id, Model model) {
+        model.addAttribute("user", userService.findById(id));
+
+        return "user-info";
+    }
 
 //    @GetMapping("/user-update/{id}")
 //    public String updateUserForm(@PathVariable("id") int id, Model model) {
