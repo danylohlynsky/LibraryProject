@@ -55,11 +55,16 @@
         </div>
         <br>
         <div class="form-group">
-            <label class="col-sm-3 control-label" for="inputDate">Registration_date:</label>
+            <label class="col-sm-3 control-label" for="role">Role:</label>
             <div class="col-sm-7">
-                <input type="date" class="form-control" id="inputDate">
+                <select th:field="*{role.id}" id = "role" class="form-control">
+                    <option th:each="r : ${roleService.listRoles()}"
+                            th:value="${r.id}"
+                            th:text = "${r.roleName}">
+                </select>
             </div>
         </div>
+        <br>
         <div class="col-sm-offset-3 col-sm-8">
             <input type="submit" class="btn btn-info" value="Register"/>
             <input type="reset" class="btn btn" value="Clear"/>

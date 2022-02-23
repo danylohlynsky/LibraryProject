@@ -1,6 +1,7 @@
 package com.group4.controller;
 import com.group4.model.User;
 import com.group4.service.MailSender;
+import com.group4.service.interfaces.RoleService;
 import com.group4.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,12 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("users")
 public class UserController {
     private final UserService userService;
+    private final RoleService roleService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping
@@ -30,6 +33,7 @@ public class UserController {
     @GetMapping("/add")
     public String createUserForm(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("roleService", roleService);
         return "create-user";
     }
 
@@ -38,6 +42,7 @@ public class UserController {
         if (result.hasErrors()){
             return "create-user";
         }
+
         userService.saveUser(user);
         return "redirect:/users";
     }
