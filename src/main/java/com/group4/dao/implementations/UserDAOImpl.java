@@ -45,4 +45,23 @@ public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
         }
         return null;
     }
+
+    public void deleteUser(User user) {
+        Session session = sessionFactory.openSession();
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery(
+                    "delete User where id = :userId"
+            );
+            query.setParameter("userId", user.getId());
+            query.executeUpdate();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+            System.out.println("Error performing JPA operation. Transaction is rolled back");
+        } finally {
+            session.close();
+        }
+    }
 }

@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface UserDAO extends DAO<User> {
     User findByMail(String email) throws MessagingException, IOException;
+    void deleteUser(User user);
 }

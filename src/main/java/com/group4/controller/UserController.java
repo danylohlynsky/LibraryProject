@@ -49,7 +49,7 @@ public class UserController {
 
     @GetMapping("/remove/{id}")
     public RedirectView deleteUser(@PathVariable("id") int id) {
-        this.userService.deleteById(id);
+        this.userService.deleteUser(userService.findById(id));
         return new RedirectView("/users");
 //        return "redirect:/users";
     }
