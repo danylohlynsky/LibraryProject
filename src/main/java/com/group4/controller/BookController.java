@@ -52,7 +52,7 @@ public class BookController {
 
     @GetMapping("/remove/{id}")
     public RedirectView removeBook(@PathVariable("id") int id) {
-        this.bookService.removeBook(id);
+        this.bookService.removeBook(bookService.getBookById(id));
         return new RedirectView("/books");
     }
 
