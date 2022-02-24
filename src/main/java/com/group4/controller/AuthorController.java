@@ -47,7 +47,7 @@ public class AuthorController {
 
     @GetMapping("/remove/{id}")
     public RedirectView removeBook(@PathVariable("id") int id) {
-        this.authorService.removeAuthor(id);
+        this.authorService.removeAuthor(authorService.getAuthorById(id));
         return new RedirectView("/authors");
     }
 
@@ -58,7 +58,7 @@ public class AuthorController {
     }
     @GetMapping("books-show/{id}")
     public String showBooks(@PathVariable("id") int id,Model model){
-        model.addAttribute("book",bookService.getBookById(id));
+        model.addAttribute("book", bookService.getBookById(id));
 
         return "book-show";
     }

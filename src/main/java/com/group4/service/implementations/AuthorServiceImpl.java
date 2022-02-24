@@ -48,9 +48,8 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     @Transactional
-    public void removeAuthor(int id) {
-        this.authorDAO.deleteById(id, Author.class);
-
+    public void removeAuthor(Author author) {
+        this.authorDAO.deleteAuthor(author);
     }
 
     @Override

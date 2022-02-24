@@ -10,11 +10,12 @@ public interface AuthorService {
 
     void updateAuthor(Author author);
 
-    void removeAuthor(int id);
+    void removeAuthor(Author author);
 
     Author getAuthorById(int id);
 
     List<Author> listAuthor();
 
     Author getAuthorByFullName(String[] fullName);
+
 }
