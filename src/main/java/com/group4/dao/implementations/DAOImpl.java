@@ -92,11 +92,11 @@ public class DAOImpl<T> implements DAO<T> {
 
     @Override
     public void deleteById(int i, Class clazz) {
-        T t = (T) findById(i, clazz);
         Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
-            session.remove(t);
+            T t = (T) session.load(clazz, i);
+            session.delete(t);
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();

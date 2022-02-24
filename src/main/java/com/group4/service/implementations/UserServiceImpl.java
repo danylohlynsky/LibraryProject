@@ -83,4 +83,8 @@ public class UserServiceImpl implements UserService {
     public User deleteById(int id) {
         return (User) this.userDao.findById(id, User.class);
     }
+
+    public void deleteUser(User user) {
+        userDao.deleteUser(user);
+    }
 }

@@ -24,7 +24,7 @@ public class SecurityController {
         this.roleService = roleService;
     }
 
-    @GetMapping("/user/registration")
+    @GetMapping("/registration")
     public String showRegistrationForm(WebRequest request, Model model) {
         User user = new User();
         model.addAttribute("user", user);

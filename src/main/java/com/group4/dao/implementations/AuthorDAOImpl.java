@@ -2,6 +2,7 @@ package com.group4.dao.implementations;
 
 import com.group4.dao.interfaces.AuthorDAO;
 import com.group4.model.Author;
+import com.group4.model.Book;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -38,4 +39,25 @@ public class AuthorDAOImpl extends DAOImpl<Author> implements AuthorDAO {
         }
         return null;
     }
+
+    @Override
+    public void deleteAuthor(Author author) {
+        Session session = sessionFactory.openSession();
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery(
+                    "delete Author where id = :authorId"
+            );
+            query.setParameter("authorId", author.getId());
+            query.executeUpdate();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+            System.out.println("Error performing JPA operation. Transaction is rolled back");
+        } finally {
+            session.close();
+        }
+    }
+
 }

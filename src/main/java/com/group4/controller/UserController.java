@@ -1,6 +1,7 @@
 package com.group4.controller;
 import com.group4.model.User;
 import com.group4.service.MailSender;
+import com.group4.service.interfaces.RoleService;
 import com.group4.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,15 +11,21 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Controller
 @RequestMapping("users")
 public class UserController {
     private final UserService userService;
+    private final RoleService roleService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping
@@ -30,6 +37,7 @@ public class UserController {
     @GetMapping("/add")
     public String createUserForm(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("roleService", roleService);
         return "create-user";
     }
 
@@ -38,21 +46,39 @@ public class UserController {
         if (result.hasErrors()){
             return "create-user";
         }
+
         userService.saveUser(user);
         return "redirect:/users";
     }
 
+
+
     @GetMapping("/remove/{id}")
     public RedirectView deleteUser(@PathVariable("id") int id) {
-        this.userService.deleteById(id);
+        this.userService.deleteUser(userService.findById(id));
         return new RedirectView("/users");
-//        return "redirect:/users";
     }
 
+    private int idCurrentForEmail;
+    @PostMapping("/send-email")
+    public String SendEmail(@RequestParam(value="title") String title, @RequestParam(value="message") String message) {
+        List<String> emailAdd = new ArrayList<>();
+        emailAdd.add(userService.findById(idCurrentForEmail).getEmail());
+        MailSender.sendEmail(emailAdd, title, message);
+        return "redirect:/users";
+    }
 
     @GetMapping("/send-email/{id}")
     public String sendMailUser(@PathVariable("id") int id) {
-        MailSender.sendEmail(userService.findById(id).getEmail(), "Notification from library", "Hope you are alive");
+        idCurrentForEmail = id;
+        return "email";
+    }
+
+    @GetMapping("/send-email-all")
+    public String sendMailAllUsers() {
+        List<String> emailAdd = new ArrayList<>();
+        emailAdd.addAll(userService.listUser().stream().map(User::getEmail).collect(Collectors.toList()));
+        MailSender.sendEmail(emailAdd, "Notification from library", "Hope you are alive");
         return "redirect:/users";
     }
     @GetMapping("/user-date/{id}")
