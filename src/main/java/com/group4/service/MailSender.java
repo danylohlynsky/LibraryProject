@@ -5,22 +5,24 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.List;
 import java.util.Properties;
 
 public class MailSender {
-    public static void sendEmail(String emailAddress, String title, String message) {
+
+    public static void sendEmail(List<String> emailAddresses, String title, String message) {
         try {
             final Properties properties = new Properties();
             properties.setProperty("mail.transport.protocol", "smtps");
             properties.setProperty("mail.smtps.auth", "true");
             properties.setProperty("mail.smtps.host", "smtp.gmail.com");
             properties.setProperty("mail.smtps.user", "javaclublibrary@gmail.com");
-//            properties.load(MailSender.class.getClassLoader().getResourceAsStream("mail.properties"));
 
             Session session = Session.getDefaultInstance(properties);
             MimeMessage mimeMessage = new MimeMessage(session);
             mimeMessage.setFrom(new InternetAddress("javaclublibrary@gmail.com"));
-            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailAddress));
+            for (String emailAddress : emailAddresses)
+                mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailAddress));
             mimeMessage.setSubject(title);
             mimeMessage.setText(message);
 
