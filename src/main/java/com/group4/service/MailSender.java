@@ -17,10 +17,12 @@ public class MailSender {
             properties.setProperty("mail.smtps.auth", "true");
             properties.setProperty("mail.smtps.host", "smtp.gmail.com");
             properties.setProperty("mail.smtps.user", "javaclublibrary@gmail.com");
+            properties.setProperty("mail.mime.charset", "windows-1251");
 
             Session session = Session.getDefaultInstance(properties);
             MimeMessage mimeMessage = new MimeMessage(session);
             mimeMessage.setFrom(new InternetAddress("javaclublibrary@gmail.com"));
+        //  mimeMessage.setHeader("Content-Type", "text/plain; charset=UTF-8");
             for (String emailAddress : emailAddresses)
                 mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailAddress));
             mimeMessage.setSubject(title);

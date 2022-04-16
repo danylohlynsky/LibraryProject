@@ -16,6 +16,7 @@ public class SecurityAuthenticationEntryPoint implements AuthenticationEntryPoin
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
             throws IOException, ServletException {
+        Object o;
         // 401
       //  response.sendRedirect("/loginTest");
         //     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed");

@@ -59,28 +59,35 @@ public class UserController {
         return new RedirectView("/users");
     }
 
-    private int idCurrentForEmail;
+    private List<String> emails = new ArrayList<>();
     @PostMapping("/send-email")
     public String SendEmail(@RequestParam(value="title") String title, @RequestParam(value="message") String message) {
-        List<String> emailAdd = new ArrayList<>();
-        emailAdd.add(userService.findById(idCurrentForEmail).getEmail());
-        MailSender.sendEmail(emailAdd, title, message);
+        MailSender.sendEmail(emails, title, message);
+        emails.clear();
         return "redirect:/users";
     }
 
     @GetMapping("/send-email/{id}")
     public String sendMailUser(@PathVariable("id") int id) {
-        idCurrentForEmail = id;
+        emails.add(userService.findById(id).getEmail());
         return "email";
     }
 
     @GetMapping("/send-email-all")
     public String sendMailAllUsers() {
+        emails.addAll(userService.listUser().stream().map(User::getEmail).collect(Collectors.toList()));
+        return "email";
+    }
+/*
+    @PostMapping("/send-email-all")
+    public String sendAllPost(@RequestParam(value="title") String title, @RequestParam(value="message") String message) {
         List<String> emailAdd = new ArrayList<>();
         emailAdd.addAll(userService.listUser().stream().map(User::getEmail).collect(Collectors.toList()));
-        MailSender.sendEmail(emailAdd, "Notification from library", "Hope you are alive");
+        MailSender.sendEmail(emailAdd, title, message);
         return "redirect:/users";
     }
+*/
+
     @GetMapping("/user-date/{id}")
     public String bookData(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.findById(id));
